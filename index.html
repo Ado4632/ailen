@@ -65,21 +65,79 @@
             user-select: none;
             touch-action: manipulation;
         }
+        /* Верхний баннер с логотипом и поиском */
+        .navbar-custom {
+            background-color: #332e56;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar-custom img {
+            height: 40px;
+            margin-right: 15px;
+        }
+        .navbar-custom .search-container {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+        }
+        .navbar-custom .form-control {
+            margin-left: 10px;
+            width: 100%;
+            max-width: 300px;
+        }
+        /* Нижний баннер для общей суммы и кнопки оформления заказа */
+        .bottom-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #332e56;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+        }
+        .total-amount {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
+    <!-- Верхний баннер -->
+    <div class="navbar-custom">
+        <img src="https://raw.githubusercontent.com/Ado4632/ailen/main/logo.png" alt="Логотип">
+        <div class="search-container">
+            <input type="text" class="form-control" id="searchInput" placeholder="Поиск по товарам...">
+        </div>
+    </div>
+
     <div class="container mt-3">
         <h1 class="text-center mb-4">Каталог товаров</h1>
         <form id="orderForm">
             <div class="row" id="productContainer">
                 <!-- Товары будут добавлены динамически -->
             </div>
-            <div class="text-center">
-                <button type="button" class="btn btn-primary" onclick="submitOrder()">Оформить заказ</button>
-            </div>
         </form>
     </div>
+
+    <!-- Нижний баннер -->
+    <div class="bottom-banner">
+        <div class="total-amount">Сумма: 0 тг.</div>
+        <button type="button" class="btn btn-primary" onclick="submitOrder()">Оформить заказ</button>
+    </div>
+
     <script>
+        let totalAmount = 0;
+
         // Загрузка товаров из JSON файла на GitHub Pages
         $(document).ready(function() {
             $.getJSON('https://raw.githubusercontent.com/Ado4632/ailen/main/products_catalog.json', function(products) {
@@ -98,11 +156,11 @@
                                                         <div>${variant.characteristic}</div>
                                                         <div class="price-label">Цена: ${variant.price} тг.</div>
                                                     </div>
-                                                    <button type="button" class="btn btn-success me-2" onclick="addToCart(this, ${index})">Добавить</button>
+                                                    <button type="button" class="btn btn-success me-2" onclick="addToCart(this, ${variant.price})">Добавить</button>
                                                     <div class="quantity-control d-none">
-                                                        <button type="button" class="btn btn-secondary" onclick="decreaseQuantity(this)">-</button>
+                                                        <button type="button" class="btn btn-secondary" onclick="decreaseQuantity(this, ${variant.price})">-</button>
                                                         <input type="number" name="quantity" class="quantity-input" value="1" min="1">
-                                                        <button type="button" class="btn btn-secondary" onclick="increaseQuantity(this)">+</button>
+                                                        <button type="button" class="btn btn-secondary" onclick="increaseQuantity(this, ${variant.price})">+</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -115,24 +173,46 @@
                     productContainer.append(productHtml);
                 });
             });
+
+            // Обработчик для поля поиска
+            $('#searchInput').on('input', function() {
+                let searchValue = $(this).val().toLowerCase();
+                $('.card').each(function() {
+                    let productName = $(this).find('.card-title').text().toLowerCase();
+                    if (productName.includes(searchValue)) {
+                        $(this).parent().show();
+                    } else {
+                        $(this).parent().hide();
+                    }
+                });
+            });
         });
 
-        function addToCart(button, variantIndex) {
+        function addToCart(button, price) {
             $(button).hide();
             $(button).siblings('.quantity-control').removeClass('d-none');
+            updateTotalAmount(price);
         }
 
-        function increaseQuantity(button) {
+        function increaseQuantity(button, price) {
             let quantityInput = $(button).siblings('.quantity-input');
             quantityInput.val(parseInt(quantityInput.val()) + 1);
+            updateTotalAmount(price);
         }
 
-        function decreaseQuantity(button) {
+        function decreaseQuantity(button, price) {
             let quantityInput = $(button).siblings('.quantity-input');
             let currentValue = parseInt(quantityInput.val());
             if (currentValue > 1) {
                 quantityInput.val(currentValue - 1);
+                updateTotalAmount(-price);
             }
+        }
+
+        function updateTotalAmount(amount) {
+            totalAmount += amount;
+            let totalWithFee = totalAmount * 1.01; // Добавляем 1% к общей сумме
+            $('.total-amount').text(`Сумма: ${totalWithFee.toFixed(2)} тг.`);
         }
 
         function submitOrder() {
