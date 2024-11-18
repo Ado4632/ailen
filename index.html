@@ -7,13 +7,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <style>
-        /* Сделать интерфейс более удобным для мобильных устройств */
+        /* Сделать интерфейс более удобным и стильным для мобильных устройств */
         body, html {
             height: 100%;
             overflow-x: hidden;
+            background-color: #f8f9fa;
         }
         .card {
             margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .card-body {
+            position: relative;
         }
         .btn {
             width: 100%;
@@ -21,14 +27,43 @@
         .quantity-control {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
+            margin-top: 10px;
         }
         .quantity-control > button {
             width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
         }
         .quantity-input {
-            width: 50px;
+            width: 60px;
             text-align: center;
+            font-size: 1.1rem;
+        }
+        .variant-item {
+            border-top: 1px solid #e0e0e0;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        .variant-container {
+            padding-top: 10px;
+        }
+        .btn-success {
+            font-size: 0.9rem;
+        }
+        .price-label {
+            font-weight: bold;
+            color: #555;
+            font-size: 1.1rem;
+            margin-top: 5px;
+        }
+        /* Отключить двойное нажатие для масштабирования */
+        input[type="number"] {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            touch-action: manipulation;
         }
     </style>
 </head>
@@ -55,14 +90,16 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">${product.name}</h5>
-                                    <label for="variantSelect">Выберите характеристику:</label>
                                     <div class="variant-container mb-3">
                                         ${product.variants.map((variant, index) => `
-                                            <div class="variant-item mb-2">
+                                            <div class="variant-item">
                                                 <div class="d-flex align-items-center">
-                                                    <span class="me-3">${variant.characteristic} - ${variant.price} тг.</span>
+                                                    <div class="flex-grow-1">
+                                                        <div>${variant.characteristic}</div>
+                                                        <div class="price-label">Цена: ${variant.price} тг.</div>
+                                                    </div>
                                                     <button type="button" class="btn btn-success me-2" onclick="addToCart(this, ${index})">Добавить</button>
-                                                    <div class="quantity-control d-none mt-3">
+                                                    <div class="quantity-control d-none">
                                                         <button type="button" class="btn btn-secondary" onclick="decreaseQuantity(this)">-</button>
                                                         <input type="number" name="quantity" class="quantity-input" value="1" min="1">
                                                         <button type="button" class="btn btn-secondary" onclick="increaseQuantity(this)">+</button>
@@ -104,7 +141,7 @@
                 let quantity = $(this).find('.quantity-input').val();
                 if (quantity > 0) {
                     let productName = $(this).closest('.card-body').find('h5.card-title').text();
-                    let variantCharacteristic = $(this).closest('.variant-item').find('span').text();
+                    let variantCharacteristic = $(this).closest('.variant-item').find('.flex-grow-1 div:first-child').text();
                     selectedItems.push({ name: productName, characteristic: variantCharacteristic, quantity: quantity });
                 }
             });
@@ -119,3 +156,4 @@
     </script>
 </body>
 </html>
+
