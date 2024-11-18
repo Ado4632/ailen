@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <style>
-        /* Сделать интерфейс более удобным и стильным для мобильных устройств */
+        /* Общий стиль для интерфейса */
         body, html {
             height: 100%;
             overflow-x: hidden;
-            background-color: #f0f0f5;
+            background-color: #f8f9fa;
         }
         .card {
             margin-bottom: 20px;
@@ -50,11 +50,11 @@
         }
         .btn-success {
             font-size: 0.9rem;
-            background-color: #4caf50;
-            border-color: #4caf50;
+            background-color: #6c757d;
+            border-color: #6c757d;
         }
         .btn-success:hover {
-            background-color: #45a049;
+            background-color: #5a6268;
         }
         .price-label {
             font-weight: bold;
@@ -72,7 +72,7 @@
         }
         /* Верхний баннер с логотипом и поиском */
         .navbar-custom {
-            background-color: #ff6f61;
+            background-color: #343a40;
             color: #fff;
             padding: 10px;
             display: flex;
@@ -86,15 +86,33 @@
             height: 40px;
             margin-right: 15px;
         }
-        .navbar-custom .search-container {
-            flex-grow: 1;
-            display: flex;
-            align-items: center;
+        .search-button {
+            background-color: #007bff;
+            border: none;
+            color: white;
+            padding: 6px 12px;
+            font-size: 16px;
+            cursor: pointer;
         }
-        .navbar-custom .form-control {
-            margin-left: 10px;
-            width: 100%;
-            max-width: 300px;
+        .search-button:hover {
+            background-color: #0056b3;
+        }
+        .search-container {
+            position: relative;
+            width: 0;
+            transition: width 0.4s ease-in-out;
+        }
+        .search-container input {
+            width: 0;
+            padding: 6px;
+            position: absolute;
+            right: 0;
+            opacity: 0;
+            transition: width 0.4s ease-in-out, opacity 0.4s ease-in-out;
+        }
+        .search-button.active + input {
+            width: 200px;
+            opacity: 1;
         }
         /* Нижний баннер для общей суммы и кнопки оформления заказа */
         .bottom-banner {
@@ -102,7 +120,7 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background-color: #ff6f61;
+            background-color: #343a40;
             color: #fff;
             padding: 10px;
             display: flex;
@@ -113,15 +131,24 @@
         .total-amount {
             font-size: 1.2rem;
             font-weight: bold;
+            white-space: nowrap;
         }
         .btn-primary-custom {
-            background-color: #008cba;
-            border-color: #008cba;
+            background-color: #28a745;
+            border-color: #28a745;
             color: #fff;
         }
         .btn-primary-custom:hover {
-            background-color: #007bb5;
-            border-color: #007bb5;
+            background-color: #218838;
+            border-color: #218838;
+        }
+        .btn-plus {
+            background-color: #28a745;
+            color: #fff;
+        }
+        .btn-minus {
+            background-color: #dc3545;
+            color: #fff;
         }
     </style>
 </head>
@@ -130,6 +157,7 @@
     <div class="navbar-custom">
         <img src="https://raw.githubusercontent.com/Ado4632/ailen/main/logo.png" alt="Логотип">
         <div class="search-container">
+            <button class="search-button" onclick="toggleSearch(this)">🔍 Поиск</button>
             <input type="text" class="form-control" id="searchInput" placeholder="Поиск по товарам...">
         </div>
     </div>
@@ -172,9 +200,9 @@
                                                     </div>
                                                     <button type="button" class="btn btn-success me-2" onclick="addToCart(this, ${variant.price})">Добавить</button>
                                                     <div class="quantity-control d-none">
-                                                        <button type="button" class="btn btn-secondary" onclick="decreaseQuantity(this, ${variant.price})">-</button>
+                                                        <button type="button" class="btn btn-minus" onclick="decreaseQuantity(this, ${variant.price})">-</button>
                                                         <input type="number" name="quantity" class="quantity-input" value="1" min="1">
-                                                        <button type="button" class="btn btn-secondary" onclick="increaseQuantity(this, ${variant.price})">+</button>
+                                                        <button type="button" class="btn btn-plus" onclick="increaseQuantity(this, ${variant.price})">+</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -201,6 +229,11 @@
                 });
             });
         });
+
+        function toggleSearch(button) {
+            $(button).toggleClass('active');
+            $(button).next('input').toggleClass('active');
+        }
 
         function addToCart(button, price) {
             $(button).hide();
