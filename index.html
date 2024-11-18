@@ -11,7 +11,7 @@
         body, html {
             height: 100%;
             overflow-x: hidden;
-            background-color: #f8f9fa;
+            background-color: #f0f0f5;
         }
         .card {
             margin-bottom: 20px;
@@ -50,10 +50,15 @@
         }
         .btn-success {
             font-size: 0.9rem;
+            background-color: #4caf50;
+            border-color: #4caf50;
+        }
+        .btn-success:hover {
+            background-color: #45a049;
         }
         .price-label {
             font-weight: bold;
-            color: #555;
+            color: #333;
             font-size: 1.1rem;
             margin-top: 5px;
         }
@@ -67,7 +72,7 @@
         }
         /* Верхний баннер с логотипом и поиском */
         .navbar-custom {
-            background-color: #332e56;
+            background-color: #ff6f61;
             color: #fff;
             padding: 10px;
             display: flex;
@@ -97,7 +102,7 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background-color: #332e56;
+            background-color: #ff6f61;
             color: #fff;
             padding: 10px;
             display: flex;
@@ -108,6 +113,15 @@
         .total-amount {
             font-size: 1.2rem;
             font-weight: bold;
+        }
+        .btn-primary-custom {
+            background-color: #008cba;
+            border-color: #008cba;
+            color: #fff;
+        }
+        .btn-primary-custom:hover {
+            background-color: #007bb5;
+            border-color: #007bb5;
         }
     </style>
 </head>
@@ -132,7 +146,7 @@
     <!-- Нижний баннер -->
     <div class="bottom-banner">
         <div class="total-amount">Сумма: 0 тг.</div>
-        <button type="button" class="btn btn-primary" onclick="submitOrder()">Оформить заказ</button>
+        <button type="button" class="btn btn-primary-custom" onclick="submitOrder()">Оформить заказ</button>
     </div>
 
     <script>
