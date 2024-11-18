@@ -22,7 +22,7 @@
     <script>
         // Загрузка товаров из JSON файла на GitHub Pages
         $(document).ready(function() {
-            $.getJSON('https://github.com/Ado4632/ailen/blob/main/products_catalog.json', function(products) {
+            $.getJSON('https://raw.githubusercontent.com/Ado4632/ailen/refs/heads/main/products_catalog.json', function(products) {
                 let productContainer = $('#productContainer');
                 products.forEach(function(product) {
                     let variantOptions = product.variants.map(function(variant) {
