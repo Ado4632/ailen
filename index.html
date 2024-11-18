@@ -6,6 +6,7 @@
     <title>Каталог товаров</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <style>
         /* Общий стиль для интерфейса */
         body, html {
@@ -171,6 +172,11 @@
     <script>
         let totalAmount = 0;
 
+        // Инициализация EmailJS
+        (function() {
+            emailjs.init("YOUR_USER_ID"); // Замените YOUR_USER_ID на ваш ID пользователя EmailJS
+        })();
+
         // Загрузка товаров из JSON файла на GitHub Pages
         $(document).ready(function() {
             $.getJSON('https://raw.githubusercontent.com/Ado4632/ailen/main/products_catalog.json', function(products) {
@@ -259,12 +265,33 @@
                 }
             });
 
+            if (selectedItems.length === 0) {
+                alert("Выберите хотя бы один товар для оформления заказа.");
+                return;
+            }
+
             // Отправка данных заказа в Telegram бот через Web App
             if (window.Telegram.WebApp) {
                 Telegram.WebApp.sendData(JSON.stringify(selectedItems));
             } else {
                 alert("Ваш заказ: " + JSON.stringify(selectedItems));
             }
+
+            // Отправка заказа на сервер Flask для сохранения на Google Drive
+            fetch("https://ваш_сервер_здесь.com/api/save-order", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(selectedItems)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Файл сохранен на Google Drive", data);
+            })
+            .catch(error => {
+                console.error("Ошибка при сохранении на Google Drive", error);
+            });
         }
     </script>
 </body>
