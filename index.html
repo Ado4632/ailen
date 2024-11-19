@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         /* Общий стиль для интерфейса */
         body, html {
@@ -280,6 +281,21 @@
 
             // Открытие модального окна подтверждения
             $('#orderModal').modal('show');
+
+            // Отправка данных заказа в Telegram Web App
+            let selectedItems = [];
+            $('.quantity-control').each(function() {
+                let quantity = $(this).find('.quantity-input').val();
+                if (quantity > 0) {
+                    let productName = $(this).closest('.card-body').find('h5.card-title').text();
+                    let variantCharacteristic = $(this).closest('.variant-item').find('.flex-grow-1 div:first-child').text();
+                    selectedItems.push({ name: productName, characteristic: variantCharacteristic, quantity: quantity });
+                }
+            });
+
+            if (window.Telegram && window.Telegram.WebApp) {
+                Telegram.WebApp.sendData(JSON.stringify(selectedItems));
+            }
 
             // Очистка корзины после оформления заказа
             totalAmount = 0;
