@@ -1,297 +1,76 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Каталог товаров</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <style>
-        /* Общий стиль для интерфейса */
-        body, html {
-            height: 100%;
-            overflow-x: hidden;
-            background-color: #f0f2f5;
-        }
-        .card {
-            margin-bottom: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            background-color: #ffffff;
-        }
-        .card-body {
-            position: relative;
-        }
-        .btn {
-            width: 100%;
-        }
-        .quantity-control {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: 10px;
-        }
-        .quantity-control > button {
-            width: 40px;
-            height: 40px;
-            font-size: 1.2rem;
-        }
-        .quantity-input {
-            width: 60px;
-            text-align: center;
-            font-size: 1.1rem;
-        }
-        .variant-item {
-            border-top: 1px solid #e0e0e0;
-            padding-top: 10px;
-            padding-bottom: 10px;
-        }
-        .variant-container {
-            padding-top: 10px;
-        }
-        .btn-success {
-            font-size: 0.9rem;
-            background-color: #007bff;
-            border-color: #007bff;
-            color: #ffffff;
-        }
-        .btn-success:hover {
-            background-color: #0056b3;
-        }
-        .price-label {
-            font-weight: bold;
-            color: #333;
-            font-size: 1.1rem;
-            margin-top: 5px;
-        }
-        /* Отключить двойное нажатие для масштабирования */
-        input[type="number"], button {
-            -moz-user-select: none;
-            -webkit-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            touch-action: manipulation;
-        }
-        /* Верхний баннер с логотипом и поиском */
-        .navbar-custom {
-            background-color: #ffffff;
-            color: #000;
-            padding: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .navbar-custom img {
-            height: 50px;
-            margin-right: 15px;
-            border-radius: 15px;
-        }
-        .search-container {
-            display: flex;
-            align-items: center;
-            flex-grow: 1;
-            max-width: 300px;
-        }
-        .search-container input {
-            width: 100%;
-            padding: 6px;
-            border: 1px solid #ced4da;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-        /* Нижний баннер для общей суммы и кнопки оформления заказа */
-        .bottom-banner {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #ffffff;
-            color: #000;
-            padding: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            z-index: 1000;
-            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .total-amount {
-            font-size: 1.2rem;
-            font-weight: bold;
-            white-space: nowrap;
-        }
-        .btn-primary-custom {
-            background-color: #28a745;
-            border-color: #28a745;
-            color: #fff;
-            white-space: nowrap;
-            padding: 10px 20px;
-        }
-        .btn-primary-custom:hover {
-            background-color: #218838;
-            border-color: #218838;
-        }
-        .btn-plus {
-            background-color: #007bff;
-            color: #fff;
-        }
-        .btn-minus {
-            background-color: #ff4d4d;
-            color: #fff;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Верхний баннер -->
-    <div class="navbar-custom">
-        <img src="https://raw.githubusercontent.com/Ado4632/ailen/main/logo.png" alt="Логотип">
-        <div class="search-container">
-            <input type="text" class="form-control" id="searchInput" placeholder="Поиск по товарам...">
+    <div class="catalog">
+        <h1>Каталог товаров</h1>
+        <div class="product">
+            <h3>Товар 1</h3>
+            <p>Описание товара 1</p>
+            <button onclick="addToCart('Товар 1')">Добавить в корзину</button>
+        </div>
+        <div class="product">
+            <h3>Товар 2</h3>
+            <p>Описание товара 2</p>
+            <button onclick="addToCart('Товар 2')">Добавить в корзину</button>
+        </div>
+        <div class="product">
+            <h3>Товар 3</h3>
+            <p>Описание товара 3</p>
+            <button onclick="addToCart('Товар 3')">Добавить в корзину</button>
         </div>
     </div>
-
-    <div class="container mt-3">
-        <h1 class="text-center mb-4">Каталог товаров</h1>
-        <form id="orderForm">
-            <div class="row" id="productContainer">
-                <!-- Товары будут добавлены динамически -->
-            </div>
-        </form>
-    </div>
-
-    <!-- Нижний баннер -->
-    <div class="bottom-banner">
-        <div class="total-amount">Сумма: 0 тг.</div>
-        <button type="button" class="btn btn-primary-custom" onclick="submitOrder()">Оформить заказ</button>
+    <div class="cart">
+        <h2>Корзина</h2>
+        <ul id="cart-items">
+            <!-- Список товаров будет добавляться здесь -->
+        </ul>
+        <button onclick="placeOrder()">Оформить заказ</button>
     </div>
 
     <script>
-        let totalAmount = 0;
+        let cart = [];
 
-        // Инициализация EmailJS
-        (function() {
-            emailjs.init("YOUR_USER_ID"); // Замените YOUR_USER_ID на ваш ID пользователя EmailJS
-        })();
+        function addToCart(productName) {
+            cart.push(productName);
+            updateCartDisplay();
+        }
 
-        // Загрузка товаров из JSON файла на GitHub Pages
-        $(document).ready(function() {
-            $.getJSON('https://raw.githubusercontent.com/Ado4632/ailen/main/products_catalog.json', function(products) {
-                let productContainer = $('#productContainer');
-                products.forEach(function(product) {
-                    let productHtml = `
-                        <div class="col-md-12 col-sm-6 mb-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">${product.name}</h5>
-                                    <div class="variant-container mb-3">
-                                        ${product.variants.map((variant, index) => `
-                                            <div class="variant-item">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-grow-1">
-                                                        <div>${variant.characteristic}</div>
-                                                        <div class="price-label">Цена: ${variant.price} тг.</div>
-                                                    </div>
-                                                    <button type="button" class="btn btn-success me-2" onclick="addToCart(this, ${variant.price})">Добавить</button>
-                                                    <div class="quantity-control d-none">
-                                                        <button type="button" class="btn btn-minus" onclick="decreaseQuantity(this, ${variant.price})">-</button>
-                                                        <input type="number" name="quantity" class="quantity-input" value="1" min="1">
-                                                        <button type="button" class="btn btn-plus" onclick="increaseQuantity(this, ${variant.price})">+</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        `).join('')}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    productContainer.append(productHtml);
-                });
+        function updateCartDisplay() {
+            const cartItemsElement = document.getElementById('cart-items');
+            cartItemsElement.innerHTML = '';
+            cart.forEach((item, index) => {
+                const listItem = document.createElement('li');
+                listItem.textContent = item;
+                cartItemsElement.appendChild(listItem);
             });
-
-            // Обработчик для поля поиска
-            $('#searchInput').on('input', function() {
-                let searchValue = $(this).val().toLowerCase();
-                $('.card').each(function() {
-                    let productName = $(this).find('.card-title').text().toLowerCase();
-                    if (productName.includes(searchValue)) {
-                        $(this).parent().show();
-                    } else {
-                        $(this).parent().hide();
-                    }
-                });
-            });
-        });
-
-        function addToCart(button, price) {
-            $(button).hide();
-            $(button).siblings('.quantity-control').removeClass('d-none');
-            updateTotalAmount(price);
         }
 
-        function increaseQuantity(button, price) {
-            let quantityInput = $(button).siblings('.quantity-input');
-            quantityInput.val(parseInt(quantityInput.val()) + 1);
-            updateTotalAmount(price);
-        }
-
-        function decreaseQuantity(button, price) {
-            let quantityInput = $(button).siblings('.quantity-input');
-            let currentValue = parseInt(quantityInput.val());
-            if (currentValue > 1) {
-                quantityInput.val(currentValue - 1);
-                updateTotalAmount(-price);
-            }
-        }
-
-        function updateTotalAmount(amount) {
-            totalAmount += amount;
-            let totalWithFee = totalAmount * 1.01; // Добавляем 1% к общей сумме
-            $('.total-amount').text(`Сумма: ${totalWithFee.toFixed(2)} тг.`);
-        }
-
-        function submitOrder() {
-            let selectedItems = [];
-            $('.quantity-control').each(function() {
-                let quantity = $(this).find('.quantity-input').val();
-                if (quantity > 0) {
-                    let productName = $(this).closest('.card-body').find('h5.card-title').text();
-                    let variantCharacteristic = $(this).closest('.variant-item').find('.flex-grow-1 div:first-child').text();
-                    selectedItems.push({ name: productName, characteristic: variantCharacteristic, quantity: quantity });
-                }
-            });
-
-            if (selectedItems.length === 0) {
-                alert("Выберите хотя бы один товар для оформления заказа.");
+        function placeOrder() {
+            if (cart.length === 0) {
+                alert('Корзина пуста! Пожалуйста, добавьте товары в корзину.');
                 return;
             }
+            
+            // Отправляем заказ в Telegram бот
+            const orderData = {
+                items: cart
+            };
 
-            // Отправка данных заказа в Telegram бот через Web App
-            if (window.Telegram.WebApp) {
-                Telegram.WebApp.sendData(JSON.stringify(selectedItems));
+            // Используем window.Telegram.WebApp.sendData для передачи данных заказов боту
+            if (window.Telegram && window.Telegram.WebApp) {
+                window.Telegram.WebApp.sendData(JSON.stringify(orderData));
+                alert('Ваш заказ успешно оформлен! Спасибо за покупку!');
+                cart = [];
+                updateCartDisplay();
             } else {
-                alert("Ваш заказ: " + JSON.stringify(selectedItems));
+                alert('Ошибка: Telegram Web App не найден. Пожалуйста, используйте приложение Telegram для оформления заказа.');
             }
-
-            // Отправка заказа на сервер Flask для сохранения на Google Drive
-            fetch("https://ваш_сервер_здесь.com/api/save-order", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(selectedItems)
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log("Файл сохранен на Google Drive", data);
-            })
-            .catch(error => {
-                console.error("Ошибка при сохранении на Google Drive", error);
-            });
         }
     </script>
 </body>
