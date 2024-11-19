@@ -170,24 +170,6 @@
         <button type="button" class="btn btn-primary-custom" onclick="submitOrder()">Оформить заказ</button>
     </div>
 
-    <!-- Модальное окно для подтверждения заказа -->
-    <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="orderModalLabel">Ваш заказ успешно оформлен!</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" id="orderConfirmationMessage">
-                    Спасибо за ваш заказ! Мы свяжемся с вами для подтверждения.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script>
         let totalAmount = 0;
 
@@ -279,9 +261,6 @@
                 return;
             }
 
-            // Открытие модального окна подтверждения
-            $('#orderModal').modal('show');
-
             // Отправка данных заказа в Telegram Web App
             let selectedItems = [];
             $('.quantity-control').each(function() {
@@ -295,6 +274,7 @@
 
             if (window.Telegram && window.Telegram.WebApp) {
                 Telegram.WebApp.sendData(JSON.stringify(selectedItems));
+                Telegram.WebApp.close(); // Закрыть мини-приложение после отправки данных
             }
 
             // Очистка корзины после оформления заказа
