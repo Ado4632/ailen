@@ -267,7 +267,7 @@
                 let quantity = $(this).find('.quantity-input').val();
                 if (quantity > 0) {
                     let productName = $(this).closest('.card-body').find('h5.card-title').text();
-                    let variantCharacteristic = $(this).closest('.variant-item').find('.flex-grow-1 div:first-child').text();
+                    let variantCharacteristic = $(this).closest('.variant-item').find('.flex-grow-1').text().trim();
                     selectedItems.push({ name: productName, characteristic: variantCharacteristic, quantity: quantity });
                 }
             });
