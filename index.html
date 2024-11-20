@@ -260,23 +260,30 @@
                 alert("Выберите хотя бы один товар для оформления заказа.");
                 return;
             }
-
+        
             // Отправка данных заказа в Telegram Web App
             let selectedItems = [];
             $('.quantity-control').each(function() {
-                let quantity = $(this).find('.quantity-input').val();
-                if (quantity > 0) {
-                    let productName = $(this).closest('.card-body').find('h5.card-title').text();
-                    let variantCharacteristic = $(this).closest('.variant-item').find('.flex-grow-1 div:first-child').text();
-                    selectedItems.push({ name: productName, characteristic: variantCharacteristic, quantity: quantity });
+                if (!$(this).hasClass('d-none')) { // Проверяем, что товар действительно добавлен в корзину
+                    let quantity = $(this).find('.quantity-input').val();
+                    if (quantity > 0) {
+                        let productName = $(this).closest('.card-body').find('h5.card-title').text();
+                        let variantCharacteristic = $(this).closest('.variant-item').find('.flex-grow-1 div:first-child').text();
+                        selectedItems.push({ name: productName, characteristic: variantCharacteristic, quantity: quantity });
+                    }
                 }
             });
-
+        
+            if (selectedItems.length === 0) {
+                alert("Выберите хотя бы один товар для оформления заказа.");
+                return;
+            }
+        
             if (window.Telegram && window.Telegram.WebApp) {
                 Telegram.WebApp.sendData(JSON.stringify(selectedItems));
                 Telegram.WebApp.close(); // Закрыть мини-приложение после отправки данных
             }
-
+        
             // Очистка корзины после оформления заказа
             totalAmount = 0;
             $('.quantity-control').addClass('d-none');
