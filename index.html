@@ -16,7 +16,7 @@
             background-color: #f0f2f5;
         }
         .card {
-            margin-bottom: 5px; /* Уменьшен отступ между карточками */
+            margin-bottom: 10px; /* Вернули более комфортный отступ между карточками */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
             background-color: #ffffff;
@@ -32,19 +32,17 @@
             align-items: center;
             justify-content: space-between;
             margin-top: 10px;
-            flex-direction: column; /* Расположение кнопок в столбик */
+            flex-direction: row;
         }
         .quantity-control > button {
-            width: 100%;
+            width: 40px;
             height: 40px;
             font-size: 1.2rem;
-            margin-top: 5px;
         }
         .quantity-input {
             width: 60px;
             text-align: center;
             font-size: 1.1rem;
-            margin-top: 5px;
         }
         .btn-delete-bottom {
             background-color: #dc3545;
@@ -54,7 +52,8 @@
             margin-top: 10px;
             padding: 5px 10px;
             border-radius: 5px;
-            display: inline-block;
+            display: block;
+            width: auto;
         }
         .btn-delete-bottom:hover {
             background-color: #c82333;
@@ -207,6 +206,7 @@
 
     <script>
         let totalAmount = 0;
+        const cartItemsData = [];
 
         // Инициализация EmailJS
         (function() {
@@ -236,7 +236,7 @@
                                                         <button type="button" class="btn btn-minus" onclick="decreaseQuantity(this, ${variant.price})">-</button>
                                                         <input type="number" name="quantity" class="quantity-input" value="1" min="1">
                                                         <button type="button" class="btn btn-plus" onclick="increaseQuantity(this, ${variant.price})">+</button>
-                                                        <button type="button" class="btn-delete-bottom" onclick="removeFromCart(this, ${variant.price})">Удалить</button>
+                                                        <button type="button" class="btn-delete-bottom" onclick="removeFromCart(this, '${product.name}', '${variant.characteristic}', ${variant.price})">Удалить</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -270,14 +270,13 @@
             updateTotalAmount(price);
 
             // Добавляем товар в корзину
-            let cartItems = $('#cartItems');
-            let cartItemHtml = `
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    ${name} - ${characteristic} x <span class="quantity">1</span>
-                    <button type="button" class="btn btn-delete" onclick="removeItemFromCart(this, ${price})">✖</button>
-                </li>
-            `;
-            cartItems.append(cartItemHtml);
+            let existingItem = cartItemsData.find(item => item.name === name && item.characteristic === characteristic);
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cartItemsData.push({ name, characteristic, price, quantity: 1 });
+            }
+            renderCartItems();
         }
 
         function increaseQuantity(button, price) {
@@ -299,10 +298,17 @@
             }
         }
 
-        function removeFromCart(button, price) {
+        function removeFromCart(button, name, characteristic, price) {
             $(button).closest('.quantity-control').addClass('d-none');
             $(button).closest('.card-body').find('.btn-success').show();
             updateTotalAmount(-price);
+
+            // Удаление товара из корзины
+            const itemIndex = cartItemsData.findIndex(item => item.name === name && item.characteristic === characteristic);
+            if (itemIndex !== -1) {
+                cartItemsData.splice(itemIndex, 1);
+            }
+            renderCartItems();
         }
 
         function updateTotalAmount(amount) {
@@ -322,8 +328,16 @@
         }
 
         function removeItemFromCart(button, price) {
-            $(button).closest('li').remove();
-            updateTotalAmount(-price);
+            const li = $(button).closest('li');
+            const itemName = li.text().split(' - ')[0].trim();
+            const itemCharacteristic = li.text().split(' - ')[1].split(' x ')[0].trim();
+            const itemIndex = cartItemsData.findIndex(item => item.name === itemName && item.characteristic === itemCharacteristic);
+            if (itemIndex !== -1) {
+                const item = cartItemsData[itemIndex];
+                updateTotalAmount(-item.price * item.quantity);
+                cartItemsData.splice(itemIndex, 1);
+                renderCartItems();
+            }
         }
 
         function updateCartQuantity(button, change) {
@@ -334,6 +348,21 @@
                     let newQuantity = parseInt(quantityElem.text()) + change;
                     quantityElem.text(newQuantity);
                 }
+            });
+        }
+
+        // Рендеринг элементов корзины
+        function renderCartItems() {
+            const cartItemsList = $('#cartItems');
+            cartItemsList.empty();
+            cartItemsData.forEach(item => {
+                const cartItemHtml = `
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        ${item.name} - ${item.characteristic} x <span class="quantity">${item.quantity}</span>
+                        <button type="button" class="btn btn-delete" onclick="removeItemFromCart(this, ${item.price})">✖</button>
+                    </li>
+                `;
+                cartItemsList.append(cartItemHtml);
             });
         }
 
