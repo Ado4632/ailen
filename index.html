@@ -303,9 +303,9 @@
                                                 </div>
                                                 <button type="button" class="btn btn-success mt-2" onclick="addToCart(this, '${product.name}', '${variant.characteristic}', ${variant.price}, ${index})">Добавить</button>
                                                 <div class="quantity-control d-none">
-                                                    <button type="button" class="btn btn-minus" onclick="decreaseQuantity(this, ${variant.price})">-</button>
+                                                    <button type="button" class="btn btn-minus" onclick="decreaseQuantity(this, '${product.name}', '${variant.characteristic}', ${variant.price})">-</button>
                                                     <input type="number" name="quantity" class="quantity-input" value="1" min="1">
-                                                    <button type="button" class="btn btn-plus" onclick="increaseQuantity(this, ${variant.price})">+</button>
+                                                    <button type="button" class="btn btn-plus" onclick="increaseQuantity(this, '${product.name}', '${variant.characteristic}', ${variant.price})">+</button>
                                                 </div>
                                                 <button type="button" class="btn-delete-bottom" onclick="removeFromCart(this, '${product.name}', '${variant.characteristic}', ${variant.price})">Удалить</button>
                                             </div>
@@ -352,17 +352,17 @@
             renderCartItems();
         }
 
-        function increaseQuantity(button, price) {
+        function increaseQuantity(button, name, characteristic, price) {
             let quantityInput = $(button).siblings('.quantity-input');
             let newQuantity = parseInt(quantityInput.val()) + 1;
             quantityInput.val(newQuantity);
             updateTotalAmount(price);
 
-            updateCartQuantity(button, 1);
+            updateCartQuantity(name, characteristic, 1);
             renderCartItems();
         }
 
-        function decreaseQuantity(button, price) {
+        function decreaseQuantity(button, name, characteristic, price) {
             let quantityInput = $(button).siblings('.quantity-input');
             let currentValue = parseInt(quantityInput.val());
             if (currentValue > 1) {
@@ -370,7 +370,7 @@
                 quantityInput.val(newQuantity);
                 updateTotalAmount(-price);
 
-                updateCartQuantity(button, -1);
+                updateCartQuantity(name, characteristic, -1);
                 renderCartItems();
             } else {
                 removeFromCart(button, name, characteristic, price);
@@ -395,6 +395,18 @@
                 cartItemsData.splice(itemIndex, 1);
             }
             renderCartItems();
+
+            // Обновление карточки товара на главной странице
+            $(`.variant-item`).each(function() {
+                const variantItem = $(this);
+                const itemName = variantItem.closest('.card-body').find('.card-title').text();
+                const itemCharacteristic = variantItem.find('div:first-child').text().trim();
+                if (itemName === name && itemCharacteristic === characteristic) {
+                    variantItem.find('.btn-delete-bottom').hide();
+                    variantItem.find('.quantity-control').addClass('d-none').find('.quantity-input').val(1);
+                    variantItem.find('.btn-success').show();
+                }
+            });
         }
 
         function updateTotalAmount(amount) {
@@ -404,10 +416,8 @@
             $('.total-amount span:last-child').text(`${totalWithFee.toFixed(2)} тг.`);
         }
 
-        function updateCartQuantity(button, change) {
-            let cartItem = $(button).closest('.card-body').find('h5.card-title').text();
-            let characteristic = $(button).closest('.variant-item').find('div:first-child').text().trim();
-            let cartIndex = cartItemsData.findIndex(item => item.name === cartItem && item.characteristic === characteristic);
+        function updateCartQuantity(name, characteristic, change) {
+            let cartIndex = cartItemsData.findIndex(item => item.name === name && item.characteristic === characteristic);
             if (cartIndex !== -1) {
                 cartItemsData[cartIndex].quantity += change;
                 if (cartItemsData[cartIndex].quantity <= 0) {
