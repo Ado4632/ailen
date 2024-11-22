@@ -32,19 +32,17 @@
             align-items: center;
             justify-content: space-between;
             margin-top: 10px;
-            flex-direction: column;
+            flex-direction: row;
         }
         .quantity-control > button {
-            width: 100%;
+            width: 40px;
             height: 40px;
             font-size: 1.2rem;
-            margin-bottom: 5px;
         }
         .quantity-input {
             width: 60px;
             text-align: center;
             font-size: 1.1rem;
-            margin-bottom: 5px;
         }
         .btn-delete-bottom {
             background-color: #dc3545;
@@ -55,7 +53,7 @@
             border-radius: 5px;
             display: block;
             width: 100%;
-            margin-top: 5px;
+            margin-top: 10px;
         }
         .btn-delete-bottom:hover {
             background-color: #c82333;
@@ -266,11 +264,6 @@
         let totalAmount = 0;
         const cartItemsData = [];
 
-        // Инициализация EmailJS
-        (function() {
-            emailjs.init("YOUR_USER_ID"); // Замените YOUR_USER_ID на ваш ID пользователя EmailJS
-        })();
-
         // Загрузка товаров из JSON файла на GitHub Pages
         $(document).ready(function() {
             $.getJSON('https://raw.githubusercontent.com/Ado4632/ailen/main/products_catalog.json', function(products) {
@@ -359,7 +352,8 @@
         function removeFromCart(button, name, characteristic, price) {
             $(button).closest('.quantity-control').addClass('d-none');
             $(button).closest('.card-body').find('.btn-success').show();
-            updateTotalAmount(-(price * $(button).siblings('.quantity-input').val()));
+            let quantity = parseInt($(button).siblings('.quantity-input').val());
+            updateTotalAmount(-(price * quantity));
 
             // Удаление товара из корзины
             const itemIndex = cartItemsData.findIndex(item => item.name === name && item.characteristic === characteristic);
