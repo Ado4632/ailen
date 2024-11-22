@@ -49,7 +49,7 @@
             border-color: #dc3545;
             color: #ffffff;
             font-size: 1rem;
-            margin-top: 10px;
+            margin-top: 5px;
             padding: 5px 10px;
             border-radius: 5px;
             display: block;
@@ -196,7 +196,11 @@
             flex: 1;
             font-size: 1.2rem;
             font-weight: bold;
+            text-align: center;
             white-space: nowrap;
+        }
+        .bottom-banner .total-amount span {
+            display: block;
         }
         .bottom-banner .btn-primary-custom {
             flex: 0;
@@ -237,7 +241,10 @@
 
     <!-- Нижний баннер -->
     <div class="bottom-banner">
-        <div class="total-amount">Сумма: 0 тг.</div>
+        <div class="total-amount">
+            <span>Сумма:</span>
+            <span>0 тг.</span>
+        </div>
         <button type="button" class="btn btn-primary-custom" onclick="submitOrder()">Оформить заказ</button>
     </div>
 
@@ -365,7 +372,7 @@
         function updateTotalAmount(amount) {
             totalAmount += amount;
             let totalWithFee = totalAmount * 1.01; // Добавляем 1% к общей сумме
-            $('.total-amount').text(`Сумма: ${totalWithFee.toFixed(2)} тг.`);
+            $('.total-amount span:last-child').text(`${totalWithFee.toFixed(2)} тг.`);
         }
 
         function submitOrder() {
