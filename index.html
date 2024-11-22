@@ -296,7 +296,7 @@
                                     <h5 class="card-title">${product.name}</h5>
                                     <div class="variant-container mb-3">
                                         ${product.variants.map((variant, index) => `
-                                            <div class="variant-item" data-variant="${index}">
+                                            <div class="variant-item" data-variant="${index}" data-name="${product.name}" data-characteristic="${variant.characteristic}">
                                                 <div>
                                                     <div>${variant.characteristic}</div>
                                                     <div class="price-label">Цена: ${variant.price} тг.</div>
@@ -397,15 +397,11 @@
             renderCartItems();
 
             // Обновление карточки товара на главной странице
-            $(`.variant-item`).each(function() {
+            $(`.variant-item[data-name='${name}'][data-characteristic='${characteristic}']`).each(function() {
                 const variantItem = $(this);
-                const itemName = variantItem.closest('.card-body').find('.card-title').text();
-                const itemCharacteristic = variantItem.find('div:first-child').text().trim();
-                if (itemName === name && itemCharacteristic === characteristic) {
-                    variantItem.find('.btn-delete-bottom').hide();
-                    variantItem.find('.quantity-control').addClass('d-none').find('.quantity-input').val(1);
-                    variantItem.find('.btn-success').show();
-                }
+                variantItem.find('.btn-delete-bottom').hide();
+                variantItem.find('.quantity-control').addClass('d-none').find('.quantity-input').val(1);
+                variantItem.find('.btn-success').show();
             });
         }
 
@@ -457,15 +453,11 @@
             renderCartItems();
 
             // Удаление из главной страницы
-            $(`[data-variant]`).each(function() {
+            $(`.variant-item[data-name='${name}'][data-characteristic='${characteristic}']`).each(function() {
                 const variantItem = $(this);
-                const itemName = variantItem.closest('.card-body').find('.card-title').text();
-                const itemCharacteristic = variantItem.find('div:first-child').text().trim();
-                if (itemName === name && itemCharacteristic === characteristic) {
-                    variantItem.find('.btn-delete-bottom').hide();
-                    variantItem.find('.quantity-control').addClass('d-none').find('.quantity-input').val(1);
-                    variantItem.find('.btn-success').show();
-                }
+                variantItem.find('.btn-delete-bottom').hide();
+                variantItem.find('.quantity-control').addClass('d-none').find('.quantity-input').val(1);
+                variantItem.find('.btn-success').show();
             });
         }
 
