@@ -15,13 +15,15 @@
             background-color: #f0f2f5;
         }
         .card {
-            margin-bottom: 10px;
+            margin-bottom: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
             background-color: #ffffff;
+            padding: 15px;
         }
         .card-body {
             position: relative;
+            text-align: center;
         }
         .btn {
             width: 100%;
@@ -29,7 +31,7 @@
         .quantity-control {
             display: flex;
             align-items: center;
-            justify-content: flex-start;
+            justify-content: center;
             margin-top: 10px;
             gap: 10px;
         }
@@ -48,29 +50,29 @@
             border-color: #dc3545;
             color: #ffffff;
             font-size: 1rem;
-            padding: 5px 10px;
+            padding: 10px;
             border-radius: 5px;
             display: none;
-            width: auto;
-            margin-top: 10px;
-            align-self: flex-start;
+            width: 100%;
+            margin-top: 15px;
         }
         .btn-delete-bottom:hover {
             background-color: #c82333;
         }
         .variant-item {
             border-top: 1px solid #e0e0e0;
-            padding-top: 10px;
-            padding-bottom: 10px;
+            padding-top: 15px;
+            padding-bottom: 15px;
         }
         .variant-container {
             padding-top: 10px;
         }
         .btn-success {
-            font-size: 0.9rem;
+            font-size: 1rem;
             background-color: #007bff;
             border-color: #007bff;
             color: #ffffff;
+            padding: 10px;
         }
         .btn-success:hover {
             background-color: #0056b3;
@@ -78,7 +80,7 @@
         .price-label {
             font-weight: bold;
             color: #333;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             margin-top: 5px;
         }
         input[type="number"], button {
@@ -263,26 +265,24 @@
                 let productContainer = $('#productContainer');
                 products.forEach(function(product) {
                     let productHtml = `
-                        <div class="col-md-12 col-sm-6 mb-2">
+                        <div class="col-md-12 col-sm-6 mb-4">
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">${product.name}</h5>
                                     <div class="variant-container mb-3">
                                         ${product.variants.map((variant, index) => `
                                             <div class="variant-item">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-grow-1">
-                                                        <div>${variant.characteristic}</div>
-                                                        <div class="price-label">Цена: ${variant.price} тг.</div>
-                                                    </div>
-                                                    <button type="button" class="btn btn-success me-2" onclick="addToCart(this, '${product.name}', '${variant.characteristic}', ${variant.price})">Добавить</button>
-                                                    <div class="quantity-control d-none">
-                                                        <button type="button" class="btn btn-minus" onclick="decreaseQuantity(this, ${variant.price})">-</button>
-                                                        <input type="number" name="quantity" class="quantity-input" value="1" min="1">
-                                                        <button type="button" class="btn btn-plus" onclick="increaseQuantity(this, ${variant.price})">+</button>
-                                                    </div>
-                                                    <button type="button" class="btn-delete-bottom" onclick="removeFromCart(this, '${product.name}', '${variant.characteristic}', ${variant.price})">Удалить</button>
+                                                <div>
+                                                    <div>${variant.characteristic}</div>
+                                                    <div class="price-label">Цена: ${variant.price} тг.</div>
                                                 </div>
+                                                <button type="button" class="btn btn-success mt-2" onclick="addToCart(this, '${product.name}', '${variant.characteristic}', ${variant.price})">Добавить</button>
+                                                <div class="quantity-control d-none">
+                                                    <button type="button" class="btn btn-minus" onclick="decreaseQuantity(this, ${variant.price})">-</button>
+                                                    <input type="number" name="quantity" class="quantity-input" value="1" min="1">
+                                                    <button type="button" class="btn btn-plus" onclick="increaseQuantity(this, ${variant.price})">+</button>
+                                                </div>
+                                                <button type="button" class="btn-delete-bottom" onclick="removeFromCart(this, '${product.name}', '${variant.characteristic}', ${variant.price})">Удалить</button>
                                             </div>
                                         `).join('')}
                                     </div>
@@ -352,13 +352,15 @@
         }
 
         function removeFromCart(button, name, characteristic, price) {
-            const quantityControl = $(button).siblings('.quantity-control');
-            const addButton = $(button).siblings('.btn-success');
+            const productCard = $(button).closest('.card-body');
+            const quantityControl = productCard.find('.quantity-control');
+            const addButton = productCard.find('.btn-success');
             const quantity = parseInt(quantityControl.find('.quantity-input').val()) || 1;
 
             quantityControl.addClass('d-none');
             addButton.show();
             $(button).hide();
+            quantityControl.find('.quantity-input').val(1); // Сбросить количество до 1
 
             updateTotalAmount(-(price * quantity));
 
