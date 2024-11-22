@@ -63,6 +63,7 @@
             border-top: 1px solid #e0e0e0;
             padding-top: 15px;
             padding-bottom: 15px;
+            position: relative;
         }
         .variant-container {
             padding-top: 10px;
@@ -271,12 +272,12 @@
                                     <h5 class="card-title">${product.name}</h5>
                                     <div class="variant-container mb-3">
                                         ${product.variants.map((variant, index) => `
-                                            <div class="variant-item">
+                                            <div class="variant-item" data-variant="${index}">
                                                 <div>
                                                     <div>${variant.characteristic}</div>
                                                     <div class="price-label">Цена: ${variant.price} тг.</div>
                                                 </div>
-                                                <button type="button" class="btn btn-success mt-2" onclick="addToCart(this, '${product.name}', '${variant.characteristic}', ${variant.price})">Добавить</button>
+                                                <button type="button" class="btn btn-success mt-2" onclick="addToCart(this, '${product.name}', '${variant.characteristic}', ${variant.price}, ${index})">Добавить</button>
                                                 <div class="quantity-control d-none">
                                                     <button type="button" class="btn btn-minus" onclick="decreaseQuantity(this, ${variant.price})">-</button>
                                                     <input type="number" name="quantity" class="quantity-input" value="1" min="1">
@@ -307,10 +308,11 @@
             });
         });
 
-        function addToCart(button, name, characteristic, price) {
+        function addToCart(button, name, characteristic, price, index) {
             const productCard = $(button).closest('.card-body');
-            const quantityControl = productCard.find('.quantity-control');
-            const deleteButton = productCard.find('.btn-delete-bottom');
+            const variantItem = productCard.find(`.variant-item[data-variant='${index}']`);
+            const quantityControl = variantItem.find('.quantity-control');
+            const deleteButton = variantItem.find('.btn-delete-bottom');
             $(button).hide();
             quantityControl.removeClass('d-none');
             deleteButton.show();
@@ -352,9 +354,9 @@
         }
 
         function removeFromCart(button, name, characteristic, price) {
-            const productCard = $(button).closest('.card-body');
-            const quantityControl = productCard.find('.quantity-control');
-            const addButton = productCard.find('.btn-success');
+            const variantItem = $(button).closest('.variant-item');
+            const quantityControl = variantItem.find('.quantity-control');
+            const addButton = variantItem.find('.btn-success');
             const quantity = parseInt(quantityControl.find('.quantity-input').val()) || 1;
 
             quantityControl.addClass('d-none');
