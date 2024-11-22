@@ -395,11 +395,12 @@
             const variantItem = $(button).closest('.variant-item');
             const quantityControl = variantItem.find('.quantity-control');
             const addButton = variantItem.find('.btn-success');
+            const deleteButton = variantItem.find('.btn-delete-bottom');
             const quantity = parseInt(quantityControl.find('.quantity-input').val()) || 1;
 
             quantityControl.addClass('d-none');
             addButton.show();
-            $(button).hide();
+            deleteButton.hide(); // Скрыть кнопку "Удалить" при удалении товара полностью
             quantityControl.find('.quantity-input').val(1); // Сбросить количество до 1
 
             updateTotalAmount(-(price * quantity));
@@ -469,7 +470,6 @@
                 variantItem.find('.btn-delete-bottom').hide();
                 variantItem.find('.quantity-control').addClass('d-none').find('.quantity-input').val(1);
                 variantItem.find('.btn-success').show();
-                variantItem.find('.btn-minus').show(); // Обеспечиваем, что кнопка минус отображается после повторного добавления товара
             });
         }
 
