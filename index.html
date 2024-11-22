@@ -213,6 +213,7 @@
             align-items: center;
             padding: 15px;
             border-bottom: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
         }
         .cart-item .item-details {
             flex-grow: 1;
@@ -241,6 +242,18 @@
         }
         .cart-item .btn-delete:hover {
             color: #c82333;
+        }
+        .cart-item .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .cart-item .quantity-control .quantity-input {
+            width: 50px;
+            text-align: center;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -433,6 +446,11 @@
                             <div class="item-name">${item.name}</div>
                             <div class="item-characteristic">${item.characteristic}</div>
                             <div>Количество: <span class="quantity">${item.quantity}</span></div>
+                            <div class="quantity-control">
+                                <button type="button" class="btn btn-minus" onclick="decreaseQuantity(this, '${item.name}', '${item.characteristic}', ${item.price})">-</button>
+                                <input type="number" class="quantity-input" value="${item.quantity}" min="1">
+                                <button type="button" class="btn btn-plus" onclick="increaseQuantity(this, '${item.name}', '${item.characteristic}', ${item.price})">+</button>
+                            </div>
                         </div>
                         <div class="item-price">${(item.price * item.quantity).toFixed(2)} тг.</div>
                         <button type="button" class="btn btn-delete" onclick="removeItemFromCart(this, '${item.name}', '${item.characteristic}', ${item.price})">✖</button>
