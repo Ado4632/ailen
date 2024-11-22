@@ -172,6 +172,7 @@
             padding: 10px 20px;
             font-size: 1.1rem;
             margin-top: 20px;
+            width: 100%;
         }
         .btn-primary-custom:hover {
             background-color: #218838;
@@ -190,6 +191,28 @@
             justify-content: space-between;
             z-index: 1000;
             box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .bottom-banner .total-amount {
+            flex: 1;
+            font-size: 1.2rem;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        .bottom-banner .btn-primary-custom {
+            flex: 0;
+            width: auto;
+            padding: 10px 30px;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .cart-item .item-details {
+            flex-grow: 1;
+        }
+        .cart-item .item-price {
+            font-weight: bold;
         }
     </style>
 </head>
@@ -375,8 +398,8 @@
 
         function removeItemFromCart(button, price) {
             const li = $(button).closest('li');
-            const itemName = li.text().split(' - ')[0].trim();
-            const itemCharacteristic = li.text().split(' - ')[1].split(' x ')[0].trim();
+            const itemName = li.find('.item-details .item-name').text().trim();
+            const itemCharacteristic = li.find('.item-details .item-characteristic').text().trim();
             const itemIndex = cartItemsData.findIndex(item => item.name === itemName && item.characteristic === itemCharacteristic);
             if (itemIndex !== -1) {
                 const item = cartItemsData[itemIndex];
@@ -403,8 +426,13 @@
             cartItemsList.empty();
             cartItemsData.forEach(item => {
                 const cartItemHtml = `
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        ${item.name} - ${item.characteristic} x <span class="quantity">${item.quantity}</span>
+                    <li class="list-group-item cart-item">
+                        <div class="item-details">
+                            <div class="item-name">${item.name}</div>
+                            <div class="item-characteristic">${item.characteristic}</div>
+                            <div>Количество: <span class="quantity">${item.quantity}</span></div>
+                        </div>
+                        <div class="item-price">${(item.price * item.quantity).toFixed(2)} тг.</div>
                         <button type="button" class="btn btn-delete" onclick="removeItemFromCart(this, ${item.price})">✖</button>
                     </li>
                 `;
