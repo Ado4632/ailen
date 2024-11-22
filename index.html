@@ -31,19 +31,17 @@
             align-items: center;
             justify-content: space-between;
             margin-top: 10px;
-            flex-direction: column;
+            flex-direction: row;
         }
         .quantity-control > button {
             width: 40px;
             height: 40px;
             font-size: 1.2rem;
-            margin-top: 5px;
         }
         .quantity-input {
             width: 60px;
             text-align: center;
             font-size: 1.1rem;
-            margin-top: 5px;
         }
         .btn-delete-bottom {
             background-color: #dc3545;
@@ -53,6 +51,7 @@
             padding: 5px 10px;
             border-radius: 5px;
             display: block;
+            width: 100%;
             margin-top: 10px;
         }
         .btn-delete-bottom:hover {
@@ -280,8 +279,8 @@
                                                         <button type="button" class="btn btn-minus" onclick="decreaseQuantity(this, ${variant.price})">-</button>
                                                         <input type="number" name="quantity" class="quantity-input" value="1" min="1">
                                                         <button type="button" class="btn btn-plus" onclick="increaseQuantity(this, ${variant.price})">+</button>
-                                                        <button type="button" class="btn-delete-bottom" onclick="removeFromCart(this, '${product.name}', '${variant.characteristic}', ${variant.price})">Удалить</button>
                                                     </div>
+                                                    <button type="button" class="btn-delete-bottom" onclick="removeFromCart(this, '${product.name}', '${variant.characteristic}', ${variant.price})">Удалить</button>
                                                 </div>
                                             </div>
                                         `).join('')}
