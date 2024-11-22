@@ -29,9 +29,9 @@
         .quantity-control {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: flex-start;
             margin-top: 10px;
-            flex-direction: row;
+            gap: 10px;
         }
         .quantity-control > button {
             width: 40px;
@@ -51,8 +51,9 @@
             padding: 5px 10px;
             border-radius: 5px;
             display: block;
-            width: 100%;
+            width: auto;
             margin-top: 10px;
+            align-self: flex-start;
         }
         .btn-delete-bottom:hover {
             background-color: #c82333;
@@ -349,7 +350,7 @@
         }
 
         function removeFromCart(button, name, characteristic, price) {
-            const quantity = parseInt($(button).siblings('.quantity-input').val());
+            const quantity = parseInt($(button).siblings('.quantity-input').val()) || 1;
             $(button).closest('.quantity-control').addClass('d-none');
             $(button).closest('.card-body').find('.btn-success').show();
             updateTotalAmount(-(price * quantity));
