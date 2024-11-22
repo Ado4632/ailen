@@ -344,6 +344,7 @@
             let existingItem = cartItemsData.find(item => item.name === name && item.characteristic === characteristic);
             if (existingItem) {
                 existingItem.quantity++;
+                variantItem.find('.quantity-input').val(existingItem.quantity); // Обновляем количество в UI
             } else {
                 cartItemsData.push({ name, characteristic, price, quantity: 1 });
             }
