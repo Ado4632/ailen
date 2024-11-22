@@ -32,28 +32,30 @@
             align-items: center;
             justify-content: space-between;
             margin-top: 10px;
-            flex-direction: row;
+            flex-direction: column;
         }
         .quantity-control > button {
-            width: 40px;
+            width: 100%;
             height: 40px;
             font-size: 1.2rem;
+            margin-bottom: 5px;
         }
         .quantity-input {
             width: 60px;
             text-align: center;
             font-size: 1.1rem;
+            margin-bottom: 5px;
         }
         .btn-delete-bottom {
             background-color: #dc3545;
             border-color: #dc3545;
             color: #ffffff;
             font-size: 1rem;
-            margin-top: 5px;
             padding: 5px 10px;
             border-radius: 5px;
             display: block;
             width: 100%;
+            margin-top: 5px;
         }
         .btn-delete-bottom:hover {
             background-color: #c82333;
@@ -357,13 +359,11 @@
         function removeFromCart(button, name, characteristic, price) {
             $(button).closest('.quantity-control').addClass('d-none');
             $(button).closest('.card-body').find('.btn-success').show();
-            updateTotalAmount(-price);
+            updateTotalAmount(-(price * $(button).siblings('.quantity-input').val()));
 
             // Удаление товара из корзины
             const itemIndex = cartItemsData.findIndex(item => item.name === name && item.characteristic === characteristic);
             if (itemIndex !== -1) {
-                const item = cartItemsData[itemIndex];
-                totalAmount -= item.price * item.quantity; // Сбросить количество из общей суммы
                 cartItemsData.splice(itemIndex, 1);
             }
             renderCartItems();
@@ -371,6 +371,7 @@
 
         function updateTotalAmount(amount) {
             totalAmount += amount;
+            if (totalAmount < 0) totalAmount = 0; // Не допускаем отрицательную сумму
             let totalWithFee = totalAmount * 1.01; // Добавляем 1% к общей сумме
             $('.total-amount span:last-child').text(`${totalWithFee.toFixed(2)} тг.`);
         }
