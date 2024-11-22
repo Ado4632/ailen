@@ -53,7 +53,7 @@
             padding: 5px 10px;
             border-radius: 5px;
             display: block;
-            width: auto;
+            width: 100%;
         }
         .btn-delete-bottom:hover {
             background-color: #c82333;
@@ -164,6 +164,32 @@
             color: black;
             text-decoration: none;
             cursor: pointer;
+        }
+        .btn-primary-custom {
+            background-color: #28a745;
+            border-color: #28a745;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            margin-top: 20px;
+        }
+        .btn-primary-custom:hover {
+            background-color: #218838;
+            border-color: #218838;
+        }
+        .bottom-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ffffff;
+            color: #000;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
@@ -306,6 +332,8 @@
             // Удаление товара из корзины
             const itemIndex = cartItemsData.findIndex(item => item.name === name && item.characteristic === characteristic);
             if (itemIndex !== -1) {
+                const item = cartItemsData[itemIndex];
+                totalAmount -= item.price * item.quantity; // Сбросить количество из общей суммы
                 cartItemsData.splice(itemIndex, 1);
             }
             renderCartItems();
@@ -323,8 +351,26 @@
                 return;
             }
 
-            // Имитация отправки данных
-            alert("Заказ успешно оформлен!");
+            // Отправка данных заказа в Telegram Web App
+            let selectedItems = cartItemsData.map(item => ({
+                name: item.name,
+                characteristic: item.characteristic,
+                quantity: item.quantity
+            }));
+
+            if (window.Telegram && window.Telegram.WebApp) {
+                Telegram.WebApp.sendData(JSON.stringify(selectedItems));
+                Telegram.WebApp.close(); // Закрыть мини-приложение после отправки данных
+            }
+
+            // Очистка корзины после оформления заказа
+            totalAmount = 0;
+            cartItemsData.length = 0;
+            renderCartItems();
+            $('.quantity-control').addClass('d-none');
+            $('.btn-success').show();
+            $('.quantity-input').val(1);
+            updateTotalAmount(0);
         }
 
         function removeItemFromCart(button, price) {
