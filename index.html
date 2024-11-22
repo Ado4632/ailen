@@ -16,7 +16,7 @@
             background-color: #f0f2f5;
         }
         .card {
-            margin-bottom: 10px; /* Уменьшен отступ между карточками */
+            margin-bottom: 5px; /* Уменьшен отступ между карточками */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
             background-color: #ffffff;
@@ -64,6 +64,13 @@
             background-color: #dc3545;
             border-color: #dc3545;
             color: #ffffff;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
         }
         .btn-delete:hover {
             background-color: #c82333;
@@ -200,7 +207,7 @@
                 let productContainer = $('#productContainer');
                 products.forEach(function(product) {
                     let productHtml = `
-                        <div class="col-md-12 col-sm-6 mb-4">
+                        <div class="col-md-12 col-sm-6 mb-2">
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">${product.name}</h5>
@@ -217,7 +224,7 @@
                                                         <button type="button" class="btn btn-minus" onclick="decreaseQuantity(this, ${variant.price})">-</button>
                                                         <input type="number" name="quantity" class="quantity-input" value="1" min="1">
                                                         <button type="button" class="btn btn-plus" onclick="increaseQuantity(this, ${variant.price})">+</button>
-                                                        <button type="button" class="btn btn-delete ms-2" onclick="removeFromCart(this, ${variant.price})">Удалить</button>
+                                                        <button type="button" class="btn btn-delete ms-2" onclick="removeFromCart(this, ${variant.price})">✖</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -255,7 +262,7 @@
             let cartItemHtml = `
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     ${name} - ${characteristic} x <span class="quantity">1</span>
-                    <button type="button" class="btn btn-delete" onclick="removeItemFromCart(this, ${price})">Удалить</button>
+                    <button type="button" class="btn btn-delete" onclick="removeItemFromCart(this, ${price})">✖</button>
                 </li>
             `;
             cartItems.append(cartItemHtml);
@@ -297,6 +304,9 @@
                 alert("Выберите хотя бы один товар для оформления заказа.");
                 return;
             }
+
+            // Имитация отправки данных
+            alert("Заказ успешно оформлен!");
         }
 
         function removeItemFromCart(button, price) {
