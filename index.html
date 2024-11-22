@@ -146,7 +146,7 @@
         }
         .modal-content {
             background-color: #fefefe;
-            margin: 10% auto;
+            margin: 5% auto;
             padding: 20px;
             border: 1px solid #888;
             width: 90%;
@@ -216,6 +216,7 @@
         }
         .cart-item .item-details {
             flex-grow: 1;
+            text-align: left;
         }
         .cart-item .item-name {
             font-weight: bold;
@@ -229,6 +230,7 @@
             font-weight: bold;
             font-size: 1.2rem;
             color: #333;
+            text-align: right;
         }
         .cart-item .btn-delete {
             background-color: transparent;
@@ -443,6 +445,18 @@
                 cartItemsData.splice(itemIndex, 1);
             }
             renderCartItems();
+
+            // Удаление из главной страницы
+            $(`[data-variant]`).each(function() {
+                const variantItem = $(this);
+                const itemName = variantItem.closest('.card-body').find('.card-title').text();
+                const itemCharacteristic = variantItem.find('div:first-child').text().trim();
+                if (itemName === name && itemCharacteristic === characteristic) {
+                    variantItem.find('.btn-delete-bottom').hide();
+                    variantItem.find('.quantity-control').addClass('d-none').find('.quantity-input').val(1);
+                    variantItem.find('.btn-success').show();
+                }
+            });
         }
 
         function openCartModal() {
