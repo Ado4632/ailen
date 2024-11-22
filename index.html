@@ -55,6 +55,7 @@
             padding: 5px 10px;
             border-radius: 5px;
             display: block;
+            margin-top: 10px;
         }
         .btn-delete-bottom:hover {
             background-color: #c82333;
@@ -281,7 +282,7 @@
                                                         <button type="button" class="btn btn-minus" onclick="decreaseQuantity(this, ${variant.price})">-</button>
                                                         <input type="number" name="quantity" class="quantity-input" value="1" min="1">
                                                         <button type="button" class="btn btn-plus" onclick="increaseQuantity(this, ${variant.price})">+</button>
-                                                        <button type="button" class="btn-delete-bottom mt-2" onclick="removeFromCart(this, '${product.name}', '${variant.characteristic}', ${variant.price})">Удалить</button>
+                                                        <button type="button" class="btn-delete-bottom" onclick="removeFromCart(this, '${product.name}', '${variant.characteristic}', ${variant.price})">Удалить</button>
                                                     </div>
                                                 </div>
                                             </div>
