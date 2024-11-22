@@ -9,14 +9,13 @@
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        /* Общий стиль для интерфейса */
         body, html {
             height: 100%;
             overflow-x: hidden;
             background-color: #f0f2f5;
         }
         .card {
-            margin-bottom: 10px; /* Вернули более комфортный отступ между карточками */
+            margin-bottom: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
             background-color: #ffffff;
@@ -39,6 +38,10 @@
             height: 40px;
             font-size: 1.2rem;
         }
+        .quantity-control > .btn-delete-bottom {
+            margin-top: 10px;
+            width: 100%;
+        }
         .quantity-input {
             width: 60px;
             text-align: center;
@@ -52,8 +55,6 @@
             padding: 5px 10px;
             border-radius: 5px;
             display: block;
-            width: 100%;
-            margin-top: 10px;
         }
         .btn-delete-bottom:hover {
             background-color: #c82333;
@@ -81,7 +82,6 @@
             font-size: 1.1rem;
             margin-top: 5px;
         }
-        /* Отключить двойное нажатие для масштабирования */
         input[type="number"], button {
             -moz-user-select: none;
             -webkit-user-select: none;
@@ -89,7 +89,6 @@
             user-select: none;
             touch-action: manipulation;
         }
-        /* Верхний баннер с логотипом и поиском */
         .navbar-custom {
             background-color: #ffffff;
             color: #000;
@@ -132,7 +131,6 @@
         .cart-button:hover {
             background-color: #218838;
         }
-        /* Стиль модального окна корзины */
         .modal {
             display: none;
             position: fixed;
@@ -221,7 +219,6 @@
     </style>
 </head>
 <body>
-    <!-- Верхний баннер -->
     <div class="navbar-custom">
         <img src="https://raw.githubusercontent.com/Ado4632/ailen/main/logo.png" alt="Логотип">
         <div class="search-container">
@@ -239,7 +236,6 @@
         </form>
     </div>
 
-    <!-- Нижний баннер -->
     <div class="bottom-banner">
         <div class="total-amount">
             <span>Сумма:</span>
@@ -248,7 +244,6 @@
         <button type="button" class="btn btn-primary-custom" onclick="submitOrder()">Оформить заказ</button>
     </div>
 
-    <!-- Модальное окно корзины -->
     <div id="cartModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeCartModal()">&times;</span>
@@ -264,7 +259,6 @@
         let totalAmount = 0;
         const cartItemsData = [];
 
-        // Загрузка товаров из JSON файла на GitHub Pages
         $(document).ready(function() {
             $.getJSON('https://raw.githubusercontent.com/Ado4632/ailen/main/products_catalog.json', function(products) {
                 let productContainer = $('#productContainer');
@@ -287,7 +281,7 @@
                                                         <button type="button" class="btn btn-minus" onclick="decreaseQuantity(this, ${variant.price})">-</button>
                                                         <input type="number" name="quantity" class="quantity-input" value="1" min="1">
                                                         <button type="button" class="btn btn-plus" onclick="increaseQuantity(this, ${variant.price})">+</button>
-                                                        <button type="button" class="btn-delete-bottom" onclick="removeFromCart(this, '${product.name}', '${variant.characteristic}', ${variant.price})">Удалить</button>
+                                                        <button type="button" class="btn-delete-bottom mt-2" onclick="removeFromCart(this, '${product.name}', '${variant.characteristic}', ${variant.price})">Удалить</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -301,7 +295,6 @@
                 });
             });
 
-            // Обработчик для поля поиска
             $('#searchInput').on('input', function() {
                 let searchValue = $(this).val().toLowerCase();
                 $('.card').each(function() {
@@ -316,46 +309,53 @@
         });
 
         function addToCart(button, name, characteristic, price) {
+            const productCard = $(button).closest('.card-body');
+            const quantityControl = productCard.find('.quantity-control');
             $(button).hide();
-            $(button).siblings('.quantity-control').removeClass('d-none');
-            updateTotalAmount(price);
+            quantityControl.removeClass('d-none');
 
-            // Добавляем товар в корзину
             let existingItem = cartItemsData.find(item => item.name === name && item.characteristic === characteristic);
             if (existingItem) {
                 existingItem.quantity++;
             } else {
                 cartItemsData.push({ name, characteristic, price, quantity: 1 });
             }
+
+            updateTotalAmount(price);
             renderCartItems();
         }
 
         function increaseQuantity(button, price) {
             let quantityInput = $(button).siblings('.quantity-input');
-            quantityInput.val(parseInt(quantityInput.val()) + 1);
+            let newQuantity = parseInt(quantityInput.val()) + 1;
+            quantityInput.val(newQuantity);
             updateTotalAmount(price);
+
             updateCartQuantity(button, 1);
+            renderCartItems();
         }
 
         function decreaseQuantity(button, price) {
             let quantityInput = $(button).siblings('.quantity-input');
             let currentValue = parseInt(quantityInput.val());
             if (currentValue > 1) {
-                quantityInput.val(currentValue - 1);
+                let newQuantity = currentValue - 1;
+                quantityInput.val(newQuantity);
                 updateTotalAmount(-price);
+
                 updateCartQuantity(button, -1);
+                renderCartItems();
             } else {
                 removeFromCart(button, price);
             }
         }
 
         function removeFromCart(button, name, characteristic, price) {
+            const quantity = parseInt($(button).siblings('.quantity-input').val());
             $(button).closest('.quantity-control').addClass('d-none');
             $(button).closest('.card-body').find('.btn-success').show();
-            let quantity = parseInt($(button).siblings('.quantity-input').val());
             updateTotalAmount(-(price * quantity));
 
-            // Удаление товара из корзины
             const itemIndex = cartItemsData.findIndex(item => item.name === name && item.characteristic === characteristic);
             if (itemIndex !== -1) {
                 cartItemsData.splice(itemIndex, 1);
@@ -365,64 +365,23 @@
 
         function updateTotalAmount(amount) {
             totalAmount += amount;
-            if (totalAmount < 0) totalAmount = 0; // Не допускаем отрицательную сумму
-            let totalWithFee = totalAmount * 1.01; // Добавляем 1% к общей сумме
+            if (totalAmount < 0) totalAmount = 0;
+            let totalWithFee = totalAmount * 1.01;
             $('.total-amount span:last-child').text(`${totalWithFee.toFixed(2)} тг.`);
-        }
-
-        function submitOrder() {
-            if (totalAmount === 0) {
-                alert("Выберите хотя бы один товар для оформления заказа.");
-                return;
-            }
-
-            // Отправка данных заказа в Telegram Web App
-            let selectedItems = cartItemsData.map(item => ({
-                name: item.name,
-                characteristic: item.characteristic,
-                quantity: item.quantity
-            }));
-
-            if (window.Telegram && window.Telegram.WebApp) {
-                Telegram.WebApp.sendData(JSON.stringify(selectedItems));
-                Telegram.WebApp.close(); // Закрыть мини-приложение после отправки данных
-            }
-
-            // Очистка корзины после оформления заказа
-            totalAmount = 0;
-            cartItemsData.length = 0;
-            renderCartItems();
-            $('.quantity-control').addClass('d-none');
-            $('.btn-success').show();
-            $('.quantity-input').val(1);
-            updateTotalAmount(0);
-        }
-
-        function removeItemFromCart(button, price) {
-            const li = $(button).closest('li');
-            const itemName = li.find('.item-details .item-name').text().trim();
-            const itemCharacteristic = li.find('.item-details .item-characteristic').text().trim();
-            const itemIndex = cartItemsData.findIndex(item => item.name === itemName && item.characteristic === itemCharacteristic);
-            if (itemIndex !== -1) {
-                const item = cartItemsData[itemIndex];
-                updateTotalAmount(-item.price * item.quantity);
-                cartItemsData.splice(itemIndex, 1);
-                renderCartItems();
-            }
         }
 
         function updateCartQuantity(button, change) {
             let cartItem = $(button).closest('.card-body').find('h5.card-title').text();
-            $('#cartItems').find('li').each(function() {
-                if ($(this).text().includes(cartItem)) {
-                    let quantityElem = $(this).find('.quantity');
-                    let newQuantity = parseInt(quantityElem.text()) + change;
-                    quantityElem.text(newQuantity);
+            let characteristic = $(button).closest('.variant-item').find('div:first-child').text().trim();
+            let cartIndex = cartItemsData.findIndex(item => item.name === cartItem && item.characteristic === characteristic);
+            if (cartIndex !== -1) {
+                cartItemsData[cartIndex].quantity += change;
+                if (cartItemsData[cartIndex].quantity <= 0) {
+                    cartItemsData.splice(cartIndex, 1);
                 }
-            });
+            }
         }
 
-        // Рендеринг элементов корзины
         function renderCartItems() {
             const cartItemsList = $('#cartItems');
             cartItemsList.empty();
@@ -442,7 +401,6 @@
             });
         }
 
-        // Функции для управления модальным окном корзины
         function openCartModal() {
             $('#cartModal').show();
         }
