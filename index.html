@@ -31,21 +31,19 @@
             align-items: center;
             justify-content: space-between;
             margin-top: 10px;
-            flex-direction: row;
+            flex-direction: column;
         }
         .quantity-control > button {
             width: 40px;
             height: 40px;
             font-size: 1.2rem;
-        }
-        .quantity-control > .btn-delete-bottom {
-            margin-top: 10px;
-            width: 100%;
+            margin-top: 5px;
         }
         .quantity-input {
             width: 60px;
             text-align: center;
             font-size: 1.1rem;
+            margin-top: 5px;
         }
         .btn-delete-bottom {
             background-color: #dc3545;
@@ -347,7 +345,7 @@
                 updateCartQuantity(button, -1);
                 renderCartItems();
             } else {
-                removeFromCart(button, price);
+                removeFromCart(button, name, characteristic, price);
             }
         }
 
