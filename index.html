@@ -473,11 +473,19 @@
                 return;
             }
 
-            const orderDetails = cartItemsData.map(item => `${item.name} (${item.characteristic}) - ${item.quantity} шт.`).join(', ');
-            const totalCost = totalAmount.toFixed(2);
+            // Формирование списка товаров в формате JSON
+            const orderItems = cartItemsData.map(item => ({
+                name: item.name,
+                characteristic: item.characteristic,
+                quantity: item.quantity
+            }));
 
-            Telegram.WebApp.sendData(`Заказ: ${orderDetails}. Общая стоимость: ${totalCost} тг.`);
-            alert('Ваш заказ отправлен в Telegram бот. Спасибо!');
+            // Формирование данных для отправки
+            const orderData = JSON.stringify(orderItems);
+
+            // Отправка данных в Telegram WebApp
+            Telegram.WebApp.sendData(orderData);
+            alert('Заказ оформлен! Мы уже готовим накладную.');
         }
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
