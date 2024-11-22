@@ -50,7 +50,7 @@
             font-size: 1rem;
             padding: 5px 10px;
             border-radius: 5px;
-            display: block;
+            display: none;
             width: auto;
             margin-top: 10px;
             align-self: flex-start;
@@ -310,8 +310,10 @@
         function addToCart(button, name, characteristic, price) {
             const productCard = $(button).closest('.card-body');
             const quantityControl = productCard.find('.quantity-control');
+            const deleteButton = productCard.find('.btn-delete-bottom');
             $(button).hide();
             quantityControl.removeClass('d-none');
+            deleteButton.show();
 
             let existingItem = cartItemsData.find(item => item.name === name && item.characteristic === characteristic);
             if (existingItem) {
@@ -350,9 +352,14 @@
         }
 
         function removeFromCart(button, name, characteristic, price) {
-            const quantity = parseInt($(button).siblings('.quantity-input').val()) || 1;
-            $(button).closest('.quantity-control').addClass('d-none');
-            $(button).closest('.card-body').find('.btn-success').show();
+            const quantityControl = $(button).siblings('.quantity-control');
+            const addButton = $(button).siblings('.btn-success');
+            const quantity = parseInt(quantityControl.find('.quantity-input').val()) || 1;
+
+            quantityControl.addClass('d-none');
+            addButton.show();
+            $(button).hide();
+
             updateTotalAmount(-(price * quantity));
 
             const itemIndex = cartItemsData.findIndex(item => item.name === name && item.characteristic === characteristic);
