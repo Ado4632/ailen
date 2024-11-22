@@ -409,14 +409,6 @@
                 cartItemsData.splice(itemIndex, 1);
             }
             renderCartItems();
-
-            // Обновление карточки товара на главной странице
-            $(`.variant-item[data-name='${name}'][data-characteristic='${characteristic}']`).each(function() {
-                const variantItem = $(this);
-                variantItem.find('.btn-delete-bottom').hide();
-                variantItem.find('.quantity-control').addClass('d-none').find('.quantity-input').val(1);
-                variantItem.find('.btn-success').show();
-            });
         }
 
         function updateTotalAmount(amount) {
@@ -471,12 +463,13 @@
             }
             renderCartItems();
 
-            // Удаление из главной страницы
+            // Обновление карточки товара на главной странице
             $(`.variant-item[data-name='${name}'][data-characteristic='${characteristic}']`).each(function() {
                 const variantItem = $(this);
                 variantItem.find('.btn-delete-bottom').hide();
                 variantItem.find('.quantity-control').addClass('d-none').find('.quantity-input').val(1);
                 variantItem.find('.btn-success').show();
+                variantItem.find('.btn-minus').show(); // Обеспечиваем, что кнопка минус отображается после повторного добавления товара
             });
         }
 
