@@ -1,0 +1,1071 @@
+[
+    {
+        "name": "Миксы одиночные размеры",
+        "variants": [
+            {
+                "characteristic": "Ожидается поступление ресниц Черные МLCD",
+                "price": 1650
+            },
+            {
+                "characteristic": "Ожидается поступление ресниц Шоколад СД",
+                "price": 1650
+            }
+        ]
+    },
+    {
+        "name": "Фараон",
+        "variants": [
+            {
+                "characteristic": "5 мл",
+                "price": 2640
+            },
+            {
+                "characteristic": "3 мл",
+                "price": 2118
+            }
+        ]
+    },
+    {
+        "name": "Ultimata Bond Glue",
+        "variants": [
+            {
+                "characteristic": "5 мл",
+                "price": 2145
+            }
+        ]
+    },
+    {
+        "name": "Al-10 Glue",
+        "variants": [
+            {
+                "characteristic": "5 мл",
+                "price": 2475
+            },
+            {
+                "characteristic": "3 мл",
+                "price": 2008
+            }
+        ]
+    },
+    {
+        "name": "Ultra Super Glue",
+        "variants": [
+            {
+                "characteristic": "5 мл",
+                "price": 2145
+            }
+        ]
+    },
+    {
+        "name": "Ultra Bonding Glue",
+        "variants": [
+            {
+                "characteristic": "5 мл",
+                "price": 1925
+            }
+        ]
+    },
+    {
+        "name": "Lori Glue",
+        "variants": [
+            {
+                "characteristic": "5 мл",
+                "price": 2200
+            }
+        ]
+    },
+    {
+        "name": "Клей Леон",
+        "variants": [
+            {
+                "characteristic": "5 мл",
+                "price": 2475
+            }
+        ]
+    },
+    {
+        "name": "Активатор для клея",
+        "variants": [
+            {
+                "characteristic": "15 мл",
+                "price": 1650
+            }
+        ]
+    },
+    {
+        "name": "Обезжириватель для ресниц и бровей",
+        "variants": [
+            {
+                "characteristic": "40 мл",
+                "price": 1100
+            }
+        ]
+    },
+    {
+        "name": "Обезжириватель для ламинирования",
+        "variants": [
+            {
+                "characteristic": "15 мл",
+                "price": 847
+            }
+        ]
+    },
+    {
+        "name": "Обезжириватель для ламинирования (зеленый чай)",
+        "variants": [
+            {
+                "characteristic": "15 мл",
+                "price": 847
+            }
+        ]
+    },
+    {
+        "name": "Обезжириватель, 20 мл",
+        "variants": [
+            {
+                "characteristic": " Банан",
+                "price": 847
+            },
+            {
+                "characteristic": " Клубника",
+                "price": 847
+            },
+            {
+                "characteristic": " Зеленый чай",
+                "price": 847
+            },
+            {
+                "characteristic": "Алоэ",
+                "price": 847
+            },
+            {
+                "characteristic": "Зеленое яблоко",
+                "price": 847
+            },
+            {
+                "characteristic": " Апельсин",
+                "price": 847
+            },
+            {
+                "characteristic": " Роза",
+                "price": 847
+            }
+        ]
+    },
+    {
+        "name": "Обезжириватель, 7 мл",
+        "variants": [
+            {
+                "characteristic": "Банан",
+                "price": 484
+            },
+            {
+                "characteristic": "Без отдушки",
+                "price": 484
+            },
+            {
+                "characteristic": "Зеленый чай",
+                "price": 484
+            },
+            {
+                "characteristic": "Клубника",
+                "price": 484
+            }
+        ]
+    },
+    {
+        "name": "Primer Gel Клубника",
+        "variants": [
+            {
+                "characteristic": "15 мл",
+                "price": 847
+            }
+        ]
+    },
+    {
+        "name": "Pure Primer",
+        "variants": [
+            {
+                "characteristic": "5 мл",
+                "price": 440
+            }
+        ]
+    },
+    {
+        "name": "Премиум Витамин Е",
+        "variants": [
+            {
+                "characteristic": "10 мл",
+                "price": 825
+            }
+        ]
+    },
+    {
+        "name": "Нейтрализатор запаха",
+        "variants": [
+            {
+                "characteristic": "40 мл",
+                "price": 1485
+            }
+        ]
+    },
+    {
+        "name": "Gel Remover без отдушки",
+        "variants": [
+            {
+                "characteristic": "20 мл",
+                "price": 1422
+            }
+        ]
+    },
+    {
+        "name": "Гелевый ремувер, 20 мл",
+        "variants": [
+            {
+                "characteristic": "Банан",
+                "price": 1422
+            },
+            {
+                "characteristic": "Апельсин",
+                "price": 1422
+            },
+            {
+                "characteristic": "Клубника",
+                "price": 1422
+            },
+            {
+                "characteristic": " Персик",
+                "price": 1422
+            },
+            {
+                "characteristic": "Роза",
+                "price": 1422
+            },
+            {
+                "characteristic": "Алоэ",
+                "price": 1422
+            },
+            {
+                "characteristic": "Зеленое яблоко",
+                "price": 1422
+            },
+            {
+                "characteristic": "Зеленый чай",
+                "price": 1422
+            },
+            {
+                "characteristic": " Без отдушки",
+                "price": 1422
+            }
+        ]
+    },
+    {
+        "name": "Гелевый ремувер, 10 мл",
+        "variants": [
+            {
+                "characteristic": "Банан",
+                "price": 1100
+            },
+            {
+                "characteristic": "Апельсин",
+                "price": 1100
+            },
+            {
+                "characteristic": "Клубника",
+                "price": 1100
+            },
+            {
+                "characteristic": " Персик",
+                "price": 1100
+            },
+            {
+                "characteristic": "Роза",
+                "price": 1100
+            },
+            {
+                "characteristic": "Алоэ",
+                "price": 1100
+            },
+            {
+                "characteristic": " Зеленое яблоко",
+                "price": 1100
+            },
+            {
+                "characteristic": "Зеленый чай",
+                "price": 1100
+            },
+            {
+                "characteristic": " Без отдушки",
+                "price": 1100
+            }
+        ]
+    },
+    {
+        "name": "Remover Gel, 20 мл",
+        "variants": [
+            {
+                "characteristic": "Зеленый чай",
+                "price": 1422
+            },
+            {
+                "characteristic": "Цитрус",
+                "price": 1422
+            },
+            {
+                "characteristic": "Клубника",
+                "price": 1422
+            }
+        ]
+    },
+    {
+        "name": "Remover Крем, 15 мл",
+        "variants": [
+            {
+                "characteristic": "Зеленый чай",
+                "price": 1375
+            },
+            {
+                "characteristic": "Цитрус",
+                "price": 1375
+            },
+            {
+                "characteristic": "Клубника",
+                "price": 1375
+            }
+        ]
+    },
+    {
+        "name": "Кремовый ремувер, 5 мл",
+        "variants": [
+            {
+                "characteristic": "Клубника",
+                "price": 666
+            },
+            {
+                "characteristic": "Апельсин",
+                "price": 666
+            },
+            {
+                "characteristic": "Зеленое яблоко",
+                "price": 666
+            },
+            {
+                "characteristic": "Алоэ",
+                "price": 666
+            },
+            {
+                "characteristic": "Банан",
+                "price": 666
+            },
+            {
+                "characteristic": "Дыня",
+                "price": 666
+            },
+            {
+                "characteristic": "Персик",
+                "price": 666
+            },
+            {
+                "characteristic": "Зеленый чай",
+                "price": 666
+            }
+        ]
+    },
+    {
+        "name": "Кремовый ремувер, 18 мл",
+        "variants": [
+            {
+                "characteristic": "Клубника",
+                "price": 1650
+            }
+        ]
+    },
+    {
+        "name": "Кремовый ремувер",
+        "variants": [
+            {
+                "characteristic": "Апельсин",
+                "price": 1650
+            },
+            {
+                "characteristic": "Зеленое яблоко",
+                "price": 1650
+            },
+            {
+                "characteristic": "Алоэ",
+                "price": 1650
+            },
+            {
+                "characteristic": "Банан",
+                "price": 1650
+            },
+            {
+                "characteristic": "Дыня",
+                "price": 1650
+            },
+            {
+                "characteristic": "Персик",
+                "price": 1650
+            },
+            {
+                "characteristic": "Зеленый чай",
+                "price": 1650
+            }
+        ]
+    },
+    {
+        "name": "Желе, 5 г",
+        "variants": [
+            {
+                "characteristic": "Клубника",
+                "price": 688
+            },
+            {
+                "characteristic": "Без отдушки",
+                "price": 688
+            },
+            {
+                "characteristic": "Апельсин",
+                "price": 688
+            },
+            {
+                "characteristic": "Банан",
+                "price": 688
+            }
+        ]
+    },
+    {
+        "name": "Жидкий ликвид",
+        "variants": [
+            {
+                "characteristic": "10 мл",
+                "price": 1045
+            }
+        ]
+    },
+    {
+        "name": "Ботокс Экспресс",
+        "variants": [
+            {
+                "characteristic": "Масляный на кератине",
+                "price": 2145
+            }
+        ]
+    },
+    {
+        "name": "Сыворотка для питания ресниц и бровей с гиалуроновой кислотой и витаминами Е, С, D, K",
+        "variants": [
+            {
+                "characteristic": "7 мл",
+                "price": 1403
+            }
+        ]
+    },
+    {
+        "name": "Эко Леш Ботокс",
+        "variants": [
+            {
+                "characteristic": "15 мл",
+                "price": 4510
+            }
+        ]
+    },
+    {
+        "name": "Мыло для укладки бровей",
+        "variants": [
+            {
+                "characteristic": 1800,
+                "price": 990
+            }
+        ]
+    },
+    {
+        "name": "Ботокс",
+        "variants": [
+            {
+                "characteristic": "1 мл",
+                "price": 660
+            },
+            {
+                "characteristic": "10 мл",
+                "price": 2035
+            },
+            {
+                "characteristic": "10 мл",
+                "price": 1430
+            },
+            {
+                "characteristic": "20 мл",
+                "price": 2200
+            }
+        ]
+    },
+    {
+        "name": "Ботокс 24 карата",
+        "variants": [
+            {
+                "characteristic": "7 мл",
+                "price": 1293
+            }
+        ]
+    },
+    {
+        "name": "Ламинирование",
+        "variants": [
+            {
+                "characteristic": "Кондиционер, 1 мл",
+                "price": 660
+            }
+        ]
+    },
+    {
+        "name": "Набор JL",
+        "variants": [
+            {
+                "characteristic": "10 мл, пара",
+                "price": 3212
+            }
+        ]
+    },
+    {
+        "name": "Питательная эссенция",
+        "variants": [
+            {
+                "characteristic": "5 мл",
+                "price": 1760
+            }
+        ]
+    },
+    {
+        "name": "Ламинирование Экспресс в саше",
+        "variants": [
+            {
+                "characteristic": "Шаг 1",
+                "price": 605
+            },
+            {
+                "characteristic": "Шаг 2",
+                "price": 605
+            },
+            {
+                "characteristic": "Шаг 3",
+                "price": 605
+            }
+        ]
+    },
+    {
+        "name": "Ламинирование Экспресс, Шаг 1",
+        "variants": [
+            {
+                "characteristic": "7 мл",
+                "price": 1403
+            }
+        ]
+    },
+    {
+        "name": "Ламинирование Экспресс, Шаг 2",
+        "variants": [
+            {
+                "characteristic": "7 мл",
+                "price": 1403
+            }
+        ]
+    },
+    {
+        "name": "Ламинирование Экспресс, Шаг 3",
+        "variants": [
+            {
+                "characteristic": "7 мл",
+                "price": 1403
+            }
+        ]
+    },
+    {
+        "name": "Составы для ламинирования ресниц",
+        "variants": [
+            {
+                "characteristic": "Время экспозиции 5-8 мин, 10 мл",
+                "price": 1430
+            },
+            {
+                "characteristic": "Время экспозиции 8-15 мин, 15 мл",
+                "price": 2805
+            }
+        ]
+    },
+    {
+        "name": "Кератин",
+        "variants": [
+            {
+                "characteristic": "7 мл",
+                "price": 1375
+            }
+        ]
+    },
+    {
+        "name": "3-й шаг: питательный лосьон на масляной основе",
+        "variants": [
+            {
+                "characteristic": "5 мл",
+                "price": 1375
+            }
+        ]
+    },
+    {
+        "name": "3-й шаг: питательная эссенция",
+        "variants": [
+            {
+                "characteristic": "7 мл",
+                "price": 1375
+            }
+        ]
+    },
+    {
+        "name": "Очищение ресниц после процедуры ламинирования",
+        "variants": [
+            {
+                "characteristic": "5 мл",
+                "price": 1650
+            }
+        ]
+    },
+    {
+        "name": "Фиксирующий гель в коробочке",
+        "variants": [
+            {
+                "characteristic": "5 мл",
+                "price": 1595
+            }
+        ]
+    },
+    {
+        "name": "Фиксирующий гель",
+        "variants": [
+            {
+                "characteristic": "5 мл",
+                "price": 1430
+            },
+            {
+                "characteristic": "7 мл",
+                "price": 1760
+            }
+        ]
+    },
+    {
+        "name": "Фиксирующий бальзам",
+        "variants": [
+            {
+                "characteristic": "5 мл",
+                "price": 825
+            },
+            {
+                "characteristic": "20 мл",
+                "price": 1100
+            }
+        ]
+    },
+    {
+        "name": "Набор для ламинирования",
+        "variants": [
+            {
+                "characteristic": "Премиум, 4 состава",
+                "price": 5500
+            }
+        ]
+    },
+    {
+        "name": "Бокс В наборе 1, 2, Кашемир, Ботокс",
+        "variants": [
+            {
+                "characteristic": "Время экспозиции 5-8 мин, 8-12 мин, 10 мл",
+                "price": 5610
+            }
+        ]
+    },
+    {
+        "name": "Бокс В наборе 1, 2, Кашемир, Ботокс, Валики",
+        "variants": [
+            {
+                "characteristic": "Время экспозиции 5-8 мин, 8-12 мин, 10 мл",
+                "price": 6600
+            }
+        ]
+    },
+    {
+        "name": "Набор Премиум",
+        "variants": [
+            {
+                "characteristic": 16100,
+                "price": 8855
+            }
+        ]
+    },
+    {
+        "name": "Набор Юниор",
+        "variants": [
+            {
+                "characteristic": 12500,
+                "price": 6875
+            }
+        ]
+    },
+    {
+        "name": "Сашеты Lami Brow",
+        "variants": [
+            {
+                "characteristic": "Пара, 1 г",
+                "price": 990
+            }
+        ]
+    },
+    {
+        "name": "Составы 1, 2, 3",
+        "variants": [
+            {
+                "characteristic": "Сашеты для ламинирования ресниц, 1 г",
+                "price": 413
+            }
+        ]
+    },
+    {
+        "name": "Эссенция для бровей Lami Brow",
+        "variants": [
+            {
+                "characteristic": 1400,
+                "price": 770
+            }
+        ]
+    },
+    {
+        "name": "Краска Айлен",
+        "variants": [
+            {
+                "characteristic": "15 мл",
+                "price": 495
+            }
+        ]
+    },
+    {
+        "name": "Активатор",
+        "variants": [
+            {
+                "characteristic": "20 мл",
+                "price": 523
+            }
+        ]
+    },
+    {
+        "name": "Мистер Чист",
+        "variants": [
+            {
+                "characteristic": "20 мл, для очищения ресниц после процедуры ламинирования",
+                "price": 825
+            }
+        ]
+    },
+    {
+        "name": "Pure Essence",
+        "variants": [
+            {
+                "characteristic": 3600,
+                "price": 1980
+            }
+        ]
+    },
+    {
+        "name": "Keratin Boost",
+        "variants": [
+            {
+                "characteristic": 3600,
+                "price": 1980
+            }
+        ]
+    },
+    {
+        "name": "Силиконовые бигуди #S",
+        "variants": [
+            {
+                "characteristic": "5 пар, оригинал",
+                "price": 2255
+            }
+        ]
+    },
+    {
+        "name": "Силиконовые бигуди #M",
+        "variants": [
+            {
+                "characteristic": "5 пар, оригинал",
+                "price": 2255
+            }
+        ]
+    },
+    {
+        "name": "Силиконовые бигуди #M1",
+        "variants": [
+            {
+                "characteristic": "5 пар, оригинал",
+                "price": 2255
+            }
+        ]
+    },
+    {
+        "name": "Силиконовые бигуди #M2",
+        "variants": [
+            {
+                "characteristic": "5 пар, оригинал",
+                "price": 2255
+            }
+        ]
+    },
+    {
+        "name": "Силиконовые бигуди #L",
+        "variants": [
+            {
+                "characteristic": "5 пар, оригинал",
+                "price": 2255
+            }
+        ]
+    },
+    {
+        "name": "Набор силиконовых бигудей",
+        "variants": [
+            {
+                "characteristic": "Китай, не оригинал",
+                "price": 1210
+            },
+            {
+                "characteristic": "#XL, #L, #M, #S, #XS, парные, 5 пар",
+                "price": 1320
+            }
+        ]
+    },
+    {
+        "name": "Валики виноград (микс цветов)",
+        "variants": [
+            {
+                "characteristic": "6 пар",
+                "price": 3520
+            }
+        ]
+    },
+    {
+        "name": "Валики цветные",
+        "variants": [
+            {
+                "characteristic": "8 пар",
+                "price": 3795
+            },
+            {
+                "characteristic": "4 пары",
+                "price": 1760
+            }
+        ]
+    },
+    {
+        "name": "Валики Элебана",
+        "variants": [
+            {
+                "characteristic": "6 пар",
+                "price": 3795
+            }
+        ]
+    },
+    {
+        "name": "Валики для лифтинга",
+        "variants": [
+            {
+                "characteristic": "6 пар",
+                "price": 3795
+            }
+        ]
+    },
+    {
+        "name": "Валики Леш Лифт",
+        "variants": [
+            {
+                "characteristic": "8 пар",
+                "price": 2750
+            }
+        ]
+    },
+    {
+        "name": "Валики с блестками",
+        "variants": [
+            {
+                "characteristic": "6 пар",
+                "price": 3300
+            }
+        ]
+    },
+    {
+        "name": "Валики Тиффани, сирень",
+        "variants": [
+            {
+                "characteristic": "4 пары",
+                "price": 2200
+            }
+        ]
+    },
+    {
+        "name": "Валики Тиффани с нижними",
+        "variants": [
+            {
+                "characteristic": "5 пар",
+                "price": 2503
+            }
+        ]
+    },
+    {
+        "name": "Валики для нижних ресниц",
+        "variants": [
+            {
+                "characteristic": "3 пары",
+                "price": 908
+            }
+        ]
+    },
+    {
+        "name": "Силиконовая палитра",
+        "variants": [
+            {
+                "characteristic": "1 шт",
+                "price": 1513
+            }
+        ]
+    },
+    {
+        "name": "Силиконовые патчи",
+        "variants": [
+            {
+                "characteristic": "1 пара",
+                "price": 853
+            }
+        ]
+    },
+    {
+        "name": "Компенсаторы",
+        "variants": [
+            {
+                "characteristic": "1 пара",
+                "price": 853
+            }
+        ]
+    },
+    {
+        "name": "Набор бигуди для ресниц S, M, L",
+        "variants": [
+            {
+                "characteristic": "3 размера, Корея",
+                "price": 754
+            }
+        ]
+    },
+    {
+        "name": "Скотч бумажный",
+        "variants": [
+            {
+                "characteristic": "Корея, оригинал",
+                "price": 330
+            }
+        ]
+    },
+    {
+        "name": "Скотч силиконовый",
+        "variants": [
+            {
+                "characteristic": "Корея, оригинал",
+                "price": 440
+            }
+        ]
+    },
+    {
+        "name": "Набор пинцетов AiLen",
+        "variants": [
+            {
+                "characteristic": "Пакистан, пара",
+                "price": 1760
+            }
+        ]
+    },
+    {
+        "name": "Силиконовая кисть для выкладки",
+        "variants": [
+            {
+                "characteristic": "1 штука, 4 цвета",
+                "price": 550
+            }
+        ]
+    },
+    {
+        "name": "Двойная кисть",
+        "variants": [
+            {
+                "characteristic": NaN,
+                "price": 220
+            }
+        ]
+    },
+    {
+        "name": "Кисть",
+        "variants": [
+            {
+                "characteristic": NaN,
+                "price": 1100
+            }
+        ]
+    },
+    {
+        "name": "ST - 12",
+        "variants": [
+            {
+                "characteristic": "Китай",
+                "price": 275
+            }
+        ]
+    },
+    {
+        "name": "ST - 15",
+        "variants": [
+            {
+                "characteristic": "Китай",
+                "price": 275
+            }
+        ]
+    },
+    {
+        "name": "ST - 17",
+        "variants": [
+            {
+                "characteristic": "Оригинал",
+                "price": 880
+            }
+        ]
+    },
+    {
+        "name": "Топорик сетка",
+        "variants": [
+            {
+                "characteristic": "Пакистан",
+                "price": 1650
+            }
+        ]
+    },
+    {
+        "name": "Зеркало",
+        "variants": [
+            {
+                "characteristic": NaN,
+                "price": 798
+            }
+        ]
+    },
+    {
+        "name": "МФИ",
+        "variants": [
+            {
+                "characteristic": NaN,
+                "price": 1430
+            }
+        ]
+    }
+]
